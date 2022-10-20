@@ -4,10 +4,11 @@
 
 #Ceci est un script qui permet d'installer un FTP de façon automatisée.
 
+#--------------------------------------------------------------------------
 
-# On utilise la commande su pour plus de facilités
+# /!\ Il faut se mettre en su pour exécuter ce script /!\
 
-#su -
+#---------------------------------------------------------------------------
 
 #Création de deux utilisateurs
 #useradd Merry
