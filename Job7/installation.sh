@@ -10,20 +10,22 @@
 
 #---------------------------------------------------------------------------
 
-#Création de deux utilisateurs
-#useradd Merry
-#useradd Pippin
+cd
 
-#chpasswd Merry:kalimac
-#chpasswd Pippin:secondbreakfast
+#Création de deux utilisateurs
+#useradd --force-badname Merry
+#useradd --force-badname Pippin
+
+#echo "Merry":"kalimac" | chpasswd
+#echo "Pippin":"secondbreakfast" | chpasswd
 
 
 #Installation de Git et Proftpd
 apt-get -y install git && apt-get -y install proftpd-*
+apt-get -y install openssl
 apt-get -y  upgrade && apt-get -y update
 
 #Récupération des fichiers sur GitHub 
-
 git clone https://github.com/aurore-thomas/FTP.git 
 
 
@@ -40,11 +42,10 @@ mv FTP/modules.conf /etc/proftpd/modules.conf
 # On génère les clés pour la connexion FTPS :  
 mkdir /etc/proftpd/ssl
 cd /etc/proftpd/ssl
-openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out proftpd-rsa.pem -keyout proftpd-key.pem
+echo -ne "\n\n\n\n\n\n\n" | openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out proftpd-rsa.pem -keyout proftpd-key.pem
 chmod 0600 proftpd-key.pem
 
 
 #On redémarre le tout : 
-cd
 service proftpd restart
-
+cd
